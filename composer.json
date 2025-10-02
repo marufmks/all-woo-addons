@@ -1,8 +1,22 @@
 {
-  "require-dev": {
-    "wp-cli/i18n-command": "^2"
-  },
-  "scripts": {
-    "makepot": "wp i18n make-pot ."
-  }
+    "name": "maruf/ultimate-woo-addons",
+    "description": "Ultimate Woo Addons is a collection of premium quality WooCommerce blocks for the WordPress block editor (Gutenberg).",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Maruf Khan",
+            "email": "marufmks5556@gmail.com",
+            "role": "Developer"
+        }],
+    "autoload": {
+        "psr-4": {
+            "UWA\\": "includes/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+
+    "require": {}
 }
