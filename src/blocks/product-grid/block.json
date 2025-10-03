@@ -1,0 +1,14 @@
+{
+  "apiVersion": 2,
+  "name": "ultimate-woo-addons/product-grid",
+  "title": "Product Grid",
+  "category": "widgets",
+  "icon": "grid-view",
+  "description": "Display WooCommerce products in a grid layout.",
+  "supports": {
+    "align": true,
+    "html": false
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css"
+}
