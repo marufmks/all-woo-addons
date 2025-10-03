@@ -19,17 +19,24 @@ if (!defined('ABSPATH')) exit;
 require __DIR__ . '/vendor/autoload.php';
 
 //define constants
-define('UWA_VERSION', '1.0.0');
-define('UWA_FILE', __FILE__);
-define('UWA_PATH', __DIR__);
-define('UWA_URL', plugins_url('', UWA_FILE));
-define('UWA_ASSETS', UWA_URL . '/assets');
-define('UWA_NAME', 'Ultimate Woo Addons');
-define('UWA_TEXTDOMAIN', 'ultimate-woo-addons');
+define('ULTIMATEWOOADDONS_VERSION', '1.0.0');
+define('ULTIMATEWOOADDONS_FILE', __FILE__);
+define('ULTIMATEWOOADDONS_PATH', __DIR__);
+define('ULTIMATEWOOADDONS_URL', plugins_url('', ULTIMATEWOOADDONS_FILE));
+define('ULTIMATEWOOADDONS_ASSETS', ULTIMATEWOOADDONS_URL . '/assets');
+define('ULTIMATEWOOADDONS_NAME', 'Ultimate Woo Addons');
+define('ULTIMATEWOOADDONS_TEXTDOMAIN', 'ultimate-woo-addons');
 
-// Use the Plugin class from the UWA\Core namespace
+// Use the Plugin class from the UltimateWooAddons\Core namespace
 
-use UWA\Core\Plugin;
+use UltimateWooAddons\Core\Plugin;
 
 // Boot
 Plugin::init();
+
+// Activation and Deactivation hooks
+use UltimateWooAddons\Core\Activator;
+use UltimateWooAddons\Core\Deactivator;
+
+register_activation_hook(__FILE__, [Activator::class, 'activate']);
+register_deactivation_hook(__FILE__, [Deactivator::class, 'deactivate']);

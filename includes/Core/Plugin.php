@@ -1,5 +1,5 @@
 <?php
-namespace UWA\Core;
+namespace UltimateWooAddons\Core;
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
@@ -15,8 +15,8 @@ class Plugin
     public static function register_classes()
     {
         // Initialize Admin
-        \UWA\Admin\Admin::register();
+        \UltimateWooAddons\Admin\Admin::register();
         // Initialize Blocks
-        \UWA\Blocks\Blocks::register();
+        \UltimateWooAddons\Blocks\Blocks::register();
     }
 }

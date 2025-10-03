@@ -1,4 +1,4 @@
-# UWA Plugin
+# UltimateWooAddons Plugin
 
 A modular WordPress plugin boilerplate built with **OOP**, **PSR-4 autoloading**, and **modern WordPress standards**.  
 This boilerplate helps you organize plugin code into self-contained classes (Blocks, Admin, Frontend, etc.), each with a `register()` method for clean initialization.
@@ -66,7 +66,7 @@ Example:
 
 php
 Copy code
-namespace UWA\Frontend;
+namespace UltimateWooAddons\Frontend;
 
 class Shortcodes {
     public static function register() {

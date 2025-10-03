@@ -14,4 +14,5 @@ vendor/
 bin/
 .editorconfig
 build/
-
+composer.lock
+package-lock.json

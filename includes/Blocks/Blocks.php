@@ -1,5 +1,5 @@
 <?php 
-namespace UWA\Blocks;
+namespace UltimateWooAddons\Blocks;
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
@@ -12,6 +12,6 @@ class Blocks
 
     public static function register_blocks()
     {
-        register_block_type(UWA_PATH.'/build/blocks/hello-world');
+        register_block_type(ULTIMATEWOOADDONS_PATH.'/build/blocks/hello-world');
     }
 }
