@@ -38,5 +38,5 @@ Plugin::init();
 use UltimateWooAddons\Core\Activator;
 use UltimateWooAddons\Core\Deactivator;
 
-register_activation_hook(__FILE__, [Activator::class, 'activate']);
-register_deactivation_hook(__FILE__, [Deactivator::class, 'deactivate']);
+register_activation_hook(__FILE__, [Activator::class, 'activateStatic']);
+register_deactivation_hook(__FILE__, [Deactivator::class, 'deactivateStatic']);

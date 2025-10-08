@@ -1,48 +1,140 @@
 <?php 
 namespace UltimateWooAddons\Blocks;
+
+use UltimateWooAddons\Abstracts\AbstractService;
+use UltimateWooAddons\Blocks\BlockFactory;
+use UltimateWooAddons\Blocks\ProductGridBlock;
+use UltimateWooAddons\Blocks\HelloWorldBlock;
+
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
-class Blocks
+
+/**
+ * Blocks Service Class
+ * 
+ * Manages all block registration and initialization using the Factory pattern.
+ */
+class Blocks extends AbstractService
 {
-    public static function register()
+    /**
+     * Registered blocks
+     * 
+     * @var array
+     */
+    private array $registeredBlocks = [];
+
+    /**
+     * Service-specific initialization logic
+     * 
+     * @return void
+     */
+    protected function doInit(): void
     {
-        add_action('init', [self::class, 'register_blocks']);
+        $this->registerBlockTypes();
     }
 
-    public static function register_blocks() {
-        register_block_type(
-            ULTIMATEWOOADDONS_PATH.'/build/blocks/product-grid',
-            [
-                'render_callback' => [self::class, 'render_product_grid']
-            ]
-        );
+    /**
+     * Service-specific registration logic
+     * 
+     * @return void
+     */
+    protected function doRegister(): void
+    {
+        add_action('init', [$this, 'registerBlocks']);
+    }
 
-        register_block_type(ULTIMATEWOOADDONS_PATH.'/build/blocks/hello-world');
-
+    /**
+     * Register block types with the factory
+     * 
+     * @return void
+     */
+    private function registerBlockTypes(): void
+    {
+        // Register Product Grid Block
+        BlockFactory::registerBlockType('ultimate-woo-addons/product-grid', ProductGridBlock::class);
         
+        // Register Hello World Block
+        BlockFactory::registerBlockType('ultimate-woo-addons/hello-world', HelloWorldBlock::class);
     }
 
-    public static function render_product_grid($attributes) {
-        if (!function_exists('wc_get_products')) {
-            return '<p>WooCommerce not active.</p>';
+    /**
+     * Register blocks with WordPress
+     * 
+     * @return void
+     */
+    public function registerBlocks(): void
+    {
+        $this->registerProductGridBlock();
+        $this->registerHelloWorldBlock();
+    }
+
+    /**
+     * Register Product Grid Block
+     * 
+     * @return void
+     */
+    private function registerProductGridBlock(): void
+    {
+        $blockPath = ULTIMATEWOOADDONS_PATH . '/build/blocks/product-grid';
+        
+        if (!file_exists($blockPath . '/block.json')) {
+            return;
         }
 
-        $products = wc_get_products([
-            'limit' => 6,
-            'status' => 'publish'
-        ]);
+        $block = BlockFactory::create('ultimate-woo-addons/product-grid');
+        $block->register();
+        
+        $this->registeredBlocks[] = 'ultimate-woo-addons/product-grid';
+    }
 
-        ob_start();
-        echo '<div class="ultimate-woo-addons-product-grid">';
-        foreach ($products as $product) {
-            echo '<div class="ultimate-woo-addons-product-card">';
-            echo $product->get_image();
-            echo '<h3>' . esc_html($product->get_name()) . '</h3>';
-            echo wc_price($product->get_price());
-            echo '</div>';
+    /**
+     * Register Hello World Block
+     * 
+     * @return void
+     */
+    private function registerHelloWorldBlock(): void
+    {
+        $blockPath = ULTIMATEWOOADDONS_PATH . '/build/blocks/hello-world';
+        
+        if (!file_exists($blockPath . '/block.json')) {
+            return;
         }
-        echo '</div>';
-        return ob_get_clean();
+
+        $block = BlockFactory::create('ultimate-woo-addons/hello-world');
+        $block->register();
+        
+        $this->registeredBlocks[] = 'ultimate-woo-addons/hello-world';
+    }
+
+    /**
+     * Get registered blocks
+     * 
+     * @return array
+     */
+    public function getRegisteredBlocks(): array
+    {
+        return $this->registeredBlocks;
+    }
+
+    /**
+     * Check if a block is registered
+     * 
+     * @param string $blockName Block name
+     * @return bool
+     */
+    public function isBlockRegistered(string $blockName): bool
+    {
+        return in_array($blockName, $this->registeredBlocks);
+    }
+
+    /**
+     * Get block factory class name
+     * 
+     * @return string
+     */
+    public function getBlockFactoryClass(): string
+    {
+        return BlockFactory::class;
     }
 }
