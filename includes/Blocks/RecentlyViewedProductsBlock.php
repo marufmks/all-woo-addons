@@ -1,0 +1,180 @@
+<?php
+namespace UltimateWooAddons\Blocks;
+
+use UltimateWooAddons\Abstracts\AbstractBlock;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+class RecentlyViewedProductsBlock extends AbstractBlock
+{
+    private array $defaultAttributes = [
+        'limit' => 4,
+        'columns' => 4,
+        'showPrice' => true,
+        'showRating' => true,
+        'showButton' => true,
+        'heading' => '',
+        'buttonText' => '',
+    ];
+
+    public function __construct(string $blockName = 'ultimate-woo-addons/recently-viewed-products', array $blockConfig = [], array $dependencies = [])
+    {
+        $defaultConfig = [
+            'title' => __('Recently Viewed Products', 'ultimate-woo-addons'),
+            'description' => __('Display the products a visitor has recently viewed with an elegant layout.', 'ultimate-woo-addons'),
+            'category' => 'widgets',
+            'icon' => 'visibility',
+            'keywords' => ['recent', 'viewed', 'history', 'woocommerce'],
+            'supports' => [
+                'align' => ['wide', 'full'],
+                'html' => false,
+            ],
+            'attributes' => [
+                'limit' => [
+                    'type' => 'number',
+                    'default' => 4,
+                ],
+                'columns' => [
+                    'type' => 'number',
+                    'default' => 4,
+                ],
+                'showPrice' => [
+                    'type' => 'boolean',
+                    'default' => true,
+                ],
+                'showRating' => [
+                    'type' => 'boolean',
+                    'default' => true,
+                ],
+                'showButton' => [
+                    'type' => 'boolean',
+                    'default' => true,
+                ],
+                'heading' => [
+                    'type' => 'string',
+                    'default' => __('Recently Viewed', 'ultimate-woo-addons'),
+                ],
+                'buttonText' => [
+                    'type' => 'string',
+                    'default' => __('View Product', 'ultimate-woo-addons'),
+                ],
+            ],
+        ];
+
+        $blockConfig = array_merge($defaultConfig, $blockConfig);
+        parent::__construct($blockName, $blockConfig, $dependencies);
+    }
+
+    public function render(array $attributes, string $content = ''): string
+    {
+        if (!function_exists('wc_get_products')) {
+            return '<p>' . esc_html__('WooCommerce is not active.', 'ultimate-woo-addons') . '</p>';
+        }
+
+        $attributes = $this->sanitizeAttributes($attributes);
+        $products = $this->getRecentlyViewedProducts($attributes);
+
+        if (empty($products)) {
+            return '<div class="ultimate-woo-addons-recently-viewed-products-empty">' . esc_html__('Products you viewed recently will appear here as you browse the shop.', 'ultimate-woo-addons') . '</div>';
+        }
+
+        return $this->renderProducts($products, $attributes);
+    }
+
+    private function getRecentlyViewedProducts(array $attributes): array
+    {
+        if (empty($_COOKIE['woocommerce_recently_viewed'])) {
+            return [];
+        }
+
+        $rawIds = sanitize_text_field(wp_unslash($_COOKIE['woocommerce_recently_viewed']));
+        $ids = array_reverse(array_filter(array_map('absint', explode('|', $rawIds))));
+
+        if (empty($ids)) {
+            return [];
+        }
+
+        $ids = array_values(array_unique($ids));
+        $ids = array_slice($ids, 0, $attributes['limit']);
+
+        $args = [
+            'include' => $ids,
+            'orderby' => 'post__in',
+            'status' => 'publish',
+        ];
+
+        return wc_get_products($args);
+    }
+
+    private function renderProducts(array $products, array $attributes): string
+    {
+        $classes = trim($this->getBlockClasses($attributes) . ' ultimate-woo-addons-recently-viewed-products');
+        $columns = max(1, min(6, $attributes['columns']));
+        $heading = trim($attributes['heading']);
+
+        ob_start();
+        ?>
+        <section class="<?php echo esc_attr($classes); ?>" data-columns="<?php echo esc_attr($columns); ?>">
+            <?php if ($heading !== ''): ?>
+                <header class="ultimate-woo-addons-recently-viewed-products__header">
+                    <h2><?php echo esc_html($heading); ?></h2>
+                    <span class="ultimate-woo-addons-recently-viewed-products__accent"></span>
+                </header>
+            <?php endif; ?>
+            <div class="ultimate-woo-addons-recently-viewed-products__grid" style="--uwa-rvp-columns: <?php echo esc_attr($columns); ?>;">
+                <?php foreach ($products as $product): ?>
+                    <?php if (!$product instanceof \WC_Product) { continue; } ?>
+                    <article class="ultimate-woo-addons-recently-viewed-products__card">
+                        <div class="ultimate-woo-addons-recently-viewed-products__media">
+                            <a href="<?php echo esc_url($product->get_permalink()); ?>">
+                                <?php echo $product->get_image('woocommerce_thumbnail'); ?>
+                            </a>
+                            <?php if ($attributes['showButton']): ?>
+                                <a class="ultimate-woo-addons-recently-viewed-products__button" href="<?php echo esc_url($product->get_permalink()); ?>">
+                                    <?php echo esc_html($attributes['buttonText']); ?>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                        <div class="ultimate-woo-addons-recently-viewed-products__content">
+                            <h3 class="ultimate-woo-addons-recently-viewed-products__title">
+                                <a href="<?php echo esc_url($product->get_permalink()); ?>">
+                                    <?php echo esc_html($product->get_name()); ?>
+                                </a>
+                            </h3>
+                            <?php if ($attributes['showRating'] && function_exists('wc_review_ratings_enabled') && wc_review_ratings_enabled() && $product->get_rating_count() > 0): ?>
+                                <div class="ultimate-woo-addons-recently-viewed-products__rating">
+                                    <?php echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count()); ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($attributes['showPrice']): ?>
+                                <div class="ultimate-woo-addons-recently-viewed-products__price">
+                                    <?php echo wp_kses_post($product->get_price_html()); ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <?php
+
+        return ob_get_clean();
+    }
+
+    protected function sanitizeAttributes(array $attributes): array
+    {
+        $sanitized = $this->defaultAttributes;
+
+        $sanitized['limit'] = isset($attributes['limit']) ? max(1, min(12, (int) $attributes['limit'])) : $this->defaultAttributes['limit'];
+        $sanitized['columns'] = isset($attributes['columns']) ? max(1, min(6, (int) $attributes['columns'])) : $this->defaultAttributes['columns'];
+        $sanitized['showPrice'] = isset($attributes['showPrice']) ? (bool) $attributes['showPrice'] : $this->defaultAttributes['showPrice'];
+        $sanitized['showRating'] = isset($attributes['showRating']) ? (bool) $attributes['showRating'] : $this->defaultAttributes['showRating'];
+        $sanitized['showButton'] = isset($attributes['showButton']) ? (bool) $attributes['showButton'] : $this->defaultAttributes['showButton'];
+        $sanitized['heading'] = isset($attributes['heading']) && $attributes['heading'] !== '' ? wp_strip_all_tags($attributes['heading']) : __('Recently Viewed', 'ultimate-woo-addons');
+        $sanitized['buttonText'] = isset($attributes['buttonText']) && $attributes['buttonText'] !== '' ? sanitize_text_field($attributes['buttonText']) : __('View Product', 'ultimate-woo-addons');
+
+        return $sanitized;
+    }
+}

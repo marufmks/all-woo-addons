@@ -77,14 +77,37 @@ abstract class AbstractBlock implements BlockInterface
      */
     public function register(): void
     {
-        $config = $this->getBlockConfig();
+        $blockName = $this->getBlockName();
+        $blockPath = $this->getBlockPath();
         
-        // Add render callback if not already set
-        if (!isset($config['render_callback'])) {
-            $config['render_callback'] = [$this, 'render'];
-        }
+        // Check if block.json exists
+        if (file_exists($blockPath . '/block.json')) {
+            // Register using block.json metadata
+            register_block_type_from_metadata($blockPath, [
+                'render_callback' => [$this, 'render']
+            ]);
+        } else {
+            // Fallback to manual registration
+            $config = $this->getBlockConfig();
+            
+            // Add render callback if not already set
+            if (!isset($config['render_callback'])) {
+                $config['render_callback'] = [$this, 'render'];
+            }
 
-        register_block_type($this->getBlockName(), $config);
+            register_block_type($blockName, $config);
+        }
+    }
+
+    /**
+     * Get the block path
+     * 
+     * @return string
+     */
+    protected function getBlockPath(): string
+    {
+        $blockName = str_replace('ultimate-woo-addons/', '', $this->getBlockName());
+        return ULTIMATEWOOADDONS_PATH . '/build/blocks/' . $blockName;
     }
 
     /**

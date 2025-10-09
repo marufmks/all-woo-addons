@@ -5,6 +5,7 @@ use UltimateWooAddons\Abstracts\AbstractService;
 use UltimateWooAddons\Blocks\BlockFactory;
 use UltimateWooAddons\Blocks\ProductGridBlock;
 use UltimateWooAddons\Blocks\HelloWorldBlock;
+use UltimateWooAddons\Blocks\RecentlyViewedProductsBlock;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -56,6 +57,9 @@ class Blocks extends AbstractService
         
         // Register Hello World Block
         BlockFactory::registerBlockType('ultimate-woo-addons/hello-world', HelloWorldBlock::class);
+
+        // Register Recently Viewed Products Block
+        BlockFactory::registerBlockType('ultimate-woo-addons/recently-viewed-products', RecentlyViewedProductsBlock::class);
     }
 
     /**
@@ -67,6 +71,7 @@ class Blocks extends AbstractService
     {
         $this->registerProductGridBlock();
         $this->registerHelloWorldBlock();
+        $this->registerRecentlyViewedProductsBlock();
     }
 
     /**
@@ -105,6 +110,20 @@ class Blocks extends AbstractService
         $block->register();
         
         $this->registeredBlocks[] = 'ultimate-woo-addons/hello-world';
+    }
+
+    private function registerRecentlyViewedProductsBlock(): void
+    {
+        $blockPath = ULTIMATEWOOADDONS_PATH . '/build/blocks/recently-viewed-products';
+
+        if (!file_exists($blockPath . '/block.json')) {
+            return;
+        }
+
+        $block = BlockFactory::create('ultimate-woo-addons/recently-viewed-products');
+        $block->register();
+
+        $this->registeredBlocks[] = 'ultimate-woo-addons/recently-viewed-products';
     }
 
     /**

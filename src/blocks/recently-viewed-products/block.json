@@ -1,0 +1,46 @@
+{
+  "apiVersion": 2,
+  "name": "ultimate-woo-addons/recently-viewed-products",
+  "title": "Recently Viewed Products",
+  "category": "widgets",
+  "icon": "visibility",
+  "description": "Show the products a visitor looked at most recently in a polished layout.",
+  "keywords": ["recent", "history", "woocommerce"],
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  },
+  "attributes": {
+    "limit": {
+      "type": "number",
+      "default": 4
+    },
+    "columns": {
+      "type": "number",
+      "default": 4
+    },
+    "showPrice": {
+      "type": "boolean",
+      "default": true
+    },
+    "showRating": {
+      "type": "boolean",
+      "default": true
+    },
+    "showButton": {
+      "type": "boolean",
+      "default": true
+    },
+    "heading": {
+      "type": "string",
+      "default": "Recently Viewed"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "View Product"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "editorStyle": "file:./index.css"
+}
