@@ -144,6 +144,12 @@ class Plugin
             return new \UltimateWooAddons\Blocks\Blocks();
         });
         $this->services[] = 'blocks';
+
+        // Register Recently Viewed service
+        $this->container->singleton('recentlyViewed', function() {
+            return new \UltimateWooAddons\Services\RecentlyViewedService();
+        });
+        $this->services[] = 'recentlyViewed';
     }
 
     /**

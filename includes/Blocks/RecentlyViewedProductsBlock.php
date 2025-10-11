@@ -85,27 +85,15 @@ class RecentlyViewedProductsBlock extends AbstractBlock
 
     private function getRecentlyViewedProducts(array $attributes): array
     {
-        if (empty($_COOKIE['woocommerce_recently_viewed'])) {
+        // Get the recently viewed service from the container
+        $plugin = \UltimateWooAddons\Core\Plugin::getInstance();
+        $recentlyViewedService = $plugin->getService('recentlyViewed');
+        
+        if (!$recentlyViewedService) {
             return [];
         }
 
-        $rawIds = sanitize_text_field(wp_unslash($_COOKIE['woocommerce_recently_viewed']));
-        $ids = array_reverse(array_filter(array_map('absint', explode('|', $rawIds))));
-
-        if (empty($ids)) {
-            return [];
-        }
-
-        $ids = array_values(array_unique($ids));
-        $ids = array_slice($ids, 0, $attributes['limit']);
-
-        $args = [
-            'include' => $ids,
-            'orderby' => 'post__in',
-            'status' => 'publish',
-        ];
-
-        return wc_get_products($args);
+        return $recentlyViewedService->getRecentlyViewedWooProducts($attributes['limit']);
     }
 
     private function renderProducts(array $products, array $attributes): string
