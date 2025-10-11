@@ -1,7 +1,7 @@
 <?php
-namespace UltimateWooAddons\Core;
+namespace AllWooAddons\Core;
 
-use UltimateWooAddons\Contracts\ServiceInterface;
+use AllWooAddons\Contracts\ServiceInterface;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -124,30 +124,30 @@ class Plugin
     {
         // Register Event Manager
         $this->container->singleton('eventManager', function() {
-            return \UltimateWooAddons\Core\EventManager::getInstance();
+            return \AllWooAddons\Core\EventManager::getInstance();
         });
 
         // Register Plugin Observer
         $this->container->singleton('pluginObserver', function() {
             $eventManager = $this->container->get('eventManager');
-            return new \UltimateWooAddons\Observers\PluginObserver($eventManager);
+            return new \AllWooAddons\Observers\PluginObserver($eventManager);
         });
 
         // Register Admin service
         $this->container->singleton('admin', function() {
-            return new \UltimateWooAddons\Admin\Admin();
+            return new \AllWooAddons\Admin\Admin();
         });
         $this->services[] = 'admin';
 
         // Register Blocks service
         $this->container->singleton('blocks', function() {
-            return new \UltimateWooAddons\Blocks\Blocks();
+            return new \AllWooAddons\Blocks\Blocks();
         });
         $this->services[] = 'blocks';
 
         // Register Recently Viewed service
         $this->container->singleton('recentlyViewed', function() {
-            return new \UltimateWooAddons\Services\RecentlyViewedService();
+            return new \AllWooAddons\Services\RecentlyViewedService();
         });
         $this->services[] = 'recentlyViewed';
     }

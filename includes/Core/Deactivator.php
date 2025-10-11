@@ -1,8 +1,8 @@
 <?php
-namespace UltimateWooAddons\Core;
+namespace AllWooAddons\Core;
 
-use UltimateWooAddons\Contracts\ActivatorInterface;
-use UltimateWooAddons\Core\EventManager;
+use AllWooAddons\Contracts\ActivatorInterface;
+use AllWooAddons\Core\EventManager;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -74,13 +74,13 @@ class Deactivator implements ActivatorInterface
     private function cleanupPluginData(): void
     {
         // Remove plugin options
-        delete_option('ultimate_woo_addons_activated');
-        delete_option('ultimate_woo_addons_activation_time');
-        delete_option('ultimate_woo_addons_registered_blocks');
-        delete_option('ultimate_woo_addons_admin_pages_loaded');
+        delete_option('all_woo_addons_activated');
+        delete_option('all_woo_addons_activation_time');
+        delete_option('all_woo_addons_registered_blocks');
+        delete_option('all_woo_addons_admin_pages_loaded');
 
         // Keep version for potential future use
-        // delete_option('ultimate_woo_addons_version');
+        // delete_option('all_woo_addons_version');
     }
 
     /**
@@ -91,8 +91,8 @@ class Deactivator implements ActivatorInterface
     private function clearScheduledEvents(): void
     {
         // Clear any scheduled WordPress cron jobs
-        wp_clear_scheduled_hook('ultimate_woo_addons_daily_cleanup');
-        wp_clear_scheduled_hook('ultimate_woo_addons_weekly_report');
+        wp_clear_scheduled_hook('all_woo_addons_daily_cleanup');
+        wp_clear_scheduled_hook('all_woo_addons_weekly_report');
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
-namespace UltimateWooAddons\Blocks;
+namespace AllWooAddons\Blocks;
 
-use UltimateWooAddons\Abstracts\AbstractBlock;
+use AllWooAddons\Abstracts\AbstractBlock;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -33,11 +33,11 @@ class HelloWorldBlock extends AbstractBlock
      * @param array $blockConfig Block configuration
      * @param array $dependencies Block dependencies
      */
-    public function __construct(string $blockName = 'ultimate-woo-addons/hello-world', array $blockConfig = [], array $dependencies = [])
+    public function __construct(string $blockName = 'all-woo-addons/hello-world', array $blockConfig = [], array $dependencies = [])
     {
         $defaultConfig = [
-            'title' => __('Hello World', 'ultimate-woo-addons'),
-            'description' => __('A simple hello world block.', 'ultimate-woo-addons'),
+            'title' => __('Hello World', 'all-woo-addons'),
+            'description' => __('A simple hello world block.', 'all-woo-addons'),
             'category' => 'text',
             'icon' => 'smiley',
             'keywords' => ['hello', 'world', 'greeting'],
@@ -84,11 +84,11 @@ class HelloWorldBlock extends AbstractBlock
         ob_start();
         ?>
         <div class="<?php echo esc_attr($classes); ?>" style="text-align: <?php echo esc_attr($attributes['textAlign']); ?>;">
-            <div class="ultimate-woo-addons-hello-world__message ultimate-woo-addons-hello-world__message--<?php echo esc_attr($attributes['fontSize']); ?>">
+            <div class="all-woo-addons-hello-world__message all-woo-addons-hello-world__message--<?php echo esc_attr($attributes['fontSize']); ?>">
                 <?php echo esc_html($attributes['message']); ?>
             </div>
             <?php if ($attributes['showDate']): ?>
-                <div class="ultimate-woo-addons-hello-world__date">
+                <div class="all-woo-addons-hello-world__date">
                     <?php echo esc_html(current_time('F j, Y')); ?>
                 </div>
             <?php endif; ?>

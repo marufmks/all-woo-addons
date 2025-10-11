@@ -24,15 +24,15 @@ export default function Edit({ attributes, setAttributes }) {
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: 'ultimate-woo-addons-recently-viewed-products is-preview',
-        style: { ['--uwa-rvp-columns']: columns },
+        className: 'all-woo-addons-recently-viewed-products is-preview',
+        style: { ['--awa-rvp-columns']: columns },
     });
 
     const previewItems = useMemo(
         () =>
             Array.from({ length: Math.min(limit, MAX_PLACEHOLDERS) }, (_, index) => ({
-                name: `${__('Product', 'ultimate-woo-addons')} ${index + 1}`,
-                price: __('$49.00', 'ultimate-woo-addons'),
+                name: `${__('Product', 'all-woo-addons')} ${index + 1}`,
+                price: __('$49.00', 'all-woo-addons'),
             })),
         [limit]
     );
@@ -40,50 +40,50 @@ export default function Edit({ attributes, setAttributes }) {
     return (
         <>
             <InspectorControls>
-                <PanelBody title={__('Layout', 'ultimate-woo-addons')} initialOpen={true}>
+                <PanelBody title={__('Layout', 'all-woo-addons')} initialOpen={true}>
                     <RangeControl
-                        label={__('Products to show', 'ultimate-woo-addons')}
+                        label={__('Products to show', 'all-woo-addons')}
                         value={limit}
                         onChange={(value) => setAttributes({ limit: value })}
                         min={1}
                         max={12}
                     />
                     <RangeControl
-                        label={__('Columns', 'ultimate-woo-addons')}
+                        label={__('Columns', 'all-woo-addons')}
                         value={columns}
                         onChange={(value) => setAttributes({ columns: value })}
                         min={1}
                         max={6}
                     />
                     <TextControl
-                        label={__('Heading', 'ultimate-woo-addons')}
+                        label={__('Heading', 'all-woo-addons')}
                         value={heading}
                         onChange={(value) => setAttributes({ heading: value })}
-                        placeholder={__('Recently Viewed', 'ultimate-woo-addons')}
+                        placeholder={__('Recently Viewed', 'all-woo-addons')}
                     />
                 </PanelBody>
-                <PanelBody title={__('Display options', 'ultimate-woo-addons')}>
+                <PanelBody title={__('Display options', 'all-woo-addons')}>
                     <ToggleControl
-                        label={__('Show price', 'ultimate-woo-addons')}
+                        label={__('Show price', 'all-woo-addons')}
                         checked={showPrice}
                         onChange={(value) => setAttributes({ showPrice: value })}
                     />
                     <ToggleControl
-                        label={__('Show rating', 'ultimate-woo-addons')}
+                        label={__('Show rating', 'all-woo-addons')}
                         checked={showRating}
                         onChange={(value) => setAttributes({ showRating: value })}
                     />
                     <ToggleControl
-                        label={__('Show button', 'ultimate-woo-addons')}
+                        label={__('Show button', 'all-woo-addons')}
                         checked={showButton}
                         onChange={(value) => setAttributes({ showButton: value })}
                     />
                     {showButton && (
                         <TextControl
-                            label={__('Button text', 'ultimate-woo-addons')}
+                            label={__('Button text', 'all-woo-addons')}
                             value={buttonText}
                             onChange={(value) => setAttributes({ buttonText: value })}
-                            placeholder={__('View Product', 'ultimate-woo-addons')}
+                            placeholder={__('View Product', 'all-woo-addons')}
                         />
                     )}
                 </PanelBody>
@@ -91,38 +91,38 @@ export default function Edit({ attributes, setAttributes }) {
 
             <div {...blockProps}>
                 <Notice status="info" isDismissible={false}>
-                    {__('Visitors will see their own recently viewed products on the front end.', 'ultimate-woo-addons')}
+                    {__('Visitors will see their own recently viewed products on the front end.', 'all-woo-addons')}
                 </Notice>
 
                 {heading && (
-                    <header className="ultimate-woo-addons-recently-viewed-products__header">
+                    <header className="all-woo-addons-recently-viewed-products__header">
                         <h2>{heading}</h2>
-                        <span className="ultimate-woo-addons-recently-viewed-products__accent" />
+                        <span className="all-woo-addons-recently-viewed-products__accent" />
                     </header>
                 )}
 
-                <div className="ultimate-woo-addons-recently-viewed-products__grid">
+                <div className="all-woo-addons-recently-viewed-products__grid">
                     {previewItems.map((item, index) => (
-                        <article key={index} className="ultimate-woo-addons-recently-viewed-products__card">
-                            <div className="ultimate-woo-addons-recently-viewed-products__media is-placeholder">
-                                <span className="ultimate-woo-addons-recently-viewed-products__image-placeholder" />
+                        <article key={index} className="all-woo-addons-recently-viewed-products__card">
+                            <div className="all-woo-addons-recently-viewed-products__media is-placeholder">
+                                <span className="all-woo-addons-recently-viewed-products__image-placeholder" />
                                 {showButton && (
-                                    <span className="ultimate-woo-addons-recently-viewed-products__button is-placeholder-button">
-                                        {buttonText || __('View Product', 'ultimate-woo-addons')}
+                                    <span className="all-woo-addons-recently-viewed-products__button is-placeholder-button">
+                                        {buttonText || __('View Product', 'all-woo-addons')}
                                     </span>
                                 )}
                             </div>
-                            <div className="ultimate-woo-addons-recently-viewed-products__content">
-                                <span className="ultimate-woo-addons-recently-viewed-products__title">
+                            <div className="all-woo-addons-recently-viewed-products__content">
+                                <span className="all-woo-addons-recently-viewed-products__title">
                                     {item.name}
                                 </span>
                                 {showRating && (
-                                    <span className="ultimate-woo-addons-recently-viewed-products__rating is-placeholder-rating">
+                                    <span className="all-woo-addons-recently-viewed-products__rating is-placeholder-rating">
                                         ★★★★★
                                     </span>
                                 )}
                                 {showPrice && (
-                                    <span className="ultimate-woo-addons-recently-viewed-products__price">
+                                    <span className="all-woo-addons-recently-viewed-products__price">
                                         {item.price}
                                     </span>
                                 )}

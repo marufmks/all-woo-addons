@@ -1,11 +1,11 @@
 <?php 
-namespace UltimateWooAddons\Blocks;
+namespace AllWooAddons\Blocks;
 
-use UltimateWooAddons\Abstracts\AbstractService;
-use UltimateWooAddons\Blocks\BlockFactory;
-use UltimateWooAddons\Blocks\ProductGridBlock;
-use UltimateWooAddons\Blocks\HelloWorldBlock;
-use UltimateWooAddons\Blocks\RecentlyViewedProductsBlock;
+use AllWooAddons\Abstracts\AbstractService;
+use AllWooAddons\Blocks\BlockFactory;
+use AllWooAddons\Blocks\ProductGridBlock;
+use AllWooAddons\Blocks\HelloWorldBlock;
+use AllWooAddons\Blocks\RecentlyViewedProductsBlock;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -53,13 +53,13 @@ class Blocks extends AbstractService
     private function registerBlockTypes(): void
     {
         // Register Product Grid Block
-        BlockFactory::registerBlockType('ultimate-woo-addons/product-grid', ProductGridBlock::class);
+        BlockFactory::registerBlockType('all-woo-addons/product-grid', ProductGridBlock::class);
         
         // Register Hello World Block
-        BlockFactory::registerBlockType('ultimate-woo-addons/hello-world', HelloWorldBlock::class);
+        BlockFactory::registerBlockType('all-woo-addons/hello-world', HelloWorldBlock::class);
 
         // Register Recently Viewed Products Block
-        BlockFactory::registerBlockType('ultimate-woo-addons/recently-viewed-products', RecentlyViewedProductsBlock::class);
+        BlockFactory::registerBlockType('all-woo-addons/recently-viewed-products', RecentlyViewedProductsBlock::class);
     }
 
     /**
@@ -81,16 +81,16 @@ class Blocks extends AbstractService
      */
     private function registerProductGridBlock(): void
     {
-        $blockPath = ULTIMATEWOOADDONS_PATH . '/build/blocks/product-grid';
+        $blockPath = ALLWOOADDONS_PATH . '/build/blocks/product-grid';
         
         if (!file_exists($blockPath . '/block.json')) {
             return;
         }
 
-        $block = BlockFactory::create('ultimate-woo-addons/product-grid');
+        $block = BlockFactory::create('all-woo-addons/product-grid');
         $block->register();
         
-        $this->registeredBlocks[] = 'ultimate-woo-addons/product-grid';
+        $this->registeredBlocks[] = 'all-woo-addons/product-grid';
     }
 
     /**
@@ -100,30 +100,30 @@ class Blocks extends AbstractService
      */
     private function registerHelloWorldBlock(): void
     {
-        $blockPath = ULTIMATEWOOADDONS_PATH . '/build/blocks/hello-world';
+        $blockPath = ALLWOOADDONS_PATH . '/build/blocks/hello-world';
         
         if (!file_exists($blockPath . '/block.json')) {
             return;
         }
 
-        $block = BlockFactory::create('ultimate-woo-addons/hello-world');
+        $block = BlockFactory::create('all-woo-addons/hello-world');
         $block->register();
         
-        $this->registeredBlocks[] = 'ultimate-woo-addons/hello-world';
+        $this->registeredBlocks[] = 'all-woo-addons/hello-world';
     }
 
     private function registerRecentlyViewedProductsBlock(): void
     {
-        $blockPath = ULTIMATEWOOADDONS_PATH . '/build/blocks/recently-viewed-products';
+        $blockPath = ALLWOOADDONS_PATH . '/build/blocks/recently-viewed-products';
 
         if (!file_exists($blockPath . '/block.json')) {
             return;
         }
 
-        $block = BlockFactory::create('ultimate-woo-addons/recently-viewed-products');
+        $block = BlockFactory::create('all-woo-addons/recently-viewed-products');
         $block->register();
 
-        $this->registeredBlocks[] = 'ultimate-woo-addons/recently-viewed-products';
+        $this->registeredBlocks[] = 'all-woo-addons/recently-viewed-products';
     }
 
     /**

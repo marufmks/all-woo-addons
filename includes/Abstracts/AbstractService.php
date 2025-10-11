@@ -1,7 +1,7 @@
 <?php
-namespace UltimateWooAddons\Abstracts;
+namespace AllWooAddons\Abstracts;
 
-use UltimateWooAddons\Contracts\ServiceInterface;
+use AllWooAddons\Contracts\ServiceInterface;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.

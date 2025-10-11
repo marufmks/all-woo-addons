@@ -2,8 +2,8 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import { RichText } from '@wordpress/block-editor';
 
-registerBlockType('ultimate-woo-addons/hello-world', {
-    title: __('Hello World', 'ultimate-woo-addons'),
+registerBlockType('all-woo-addons/hello-world', {
+    title: __('Hello World', 'all-woo-addons'),
     icon: 'smiley',
     category: 'widgets',
     attributes: {
@@ -15,7 +15,7 @@ registerBlockType('ultimate-woo-addons/hello-world', {
                 tagName="p"
                 value={attributes.content}
                 onChange={(val) => setAttributes({ content: val })}
-                placeholder={__('Write something...', 'ultimate-woo-addons')}
+                placeholder={__('Write something...', 'all-woo-addons')}
             />
         );
     },

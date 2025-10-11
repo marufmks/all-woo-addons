@@ -1,5 +1,5 @@
 <?php
-namespace UltimateWooAddons\Core;
+namespace AllWooAddons\Core;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.

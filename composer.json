@@ -1,6 +1,6 @@
 {
-    "name": "maruf/ultimate-woo-addons",
-    "description": "Ultimate Woo Addons is a collection of premium quality WooCommerce blocks for the WordPress block editor (Gutenberg).",
+    "name": "maruf/all-woo-addons",
+    "description": "All Woo Addons is a collection of premium quality WooCommerce blocks for the WordPress block editor (Gutenberg).",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -11,7 +11,7 @@
         }],
     "autoload": {
         "psr-4": {
-            "UltimateWooAddons\\": "includes/"
+            "AllWooAddons\\": "includes/"
         }
     },
     "require-dev": {

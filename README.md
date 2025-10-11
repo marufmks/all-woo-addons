@@ -1,4 +1,4 @@
-# UltimateWooAddons Plugin
+# AllWooAddons Plugin
 
 A modular WordPress plugin boilerplate built with **OOP**, **PSR-4 autoloading**, and **modern WordPress standards**.  
 This boilerplate helps you organize plugin code into self-contained classes (Blocks, Admin, Frontend, etc.), each with a `register()` method for clean initialization.
@@ -7,7 +7,7 @@ This boilerplate helps you organize plugin code into self-contained classes (Blo
 
 ## 📂 Folder Structure
 
-uwa-plugin/
+all-woo-addons/
 │
 ├── includes/
 │ ├── Blocks/
@@ -26,7 +26,7 @@ uwa-plugin/
 ├── Plugin.php # Main plugin bootstrap
 ├── composer.json
 ├── README.md
-└── uwa-plugin.php # Plugin entrypoint (loader)
+└── all-woo-addons.php # Plugin entrypoint (loader)
 
 ---
 
@@ -46,12 +46,12 @@ uwa-plugin/
 
    ```bash
    cd wp-content/plugins
-   git clone https://github.com/marufmks/ultimate-woo-addons.git
+   git clone https://github.com/marufmks/all-woo-addons.git
 Install dependencies via Composer:
 
 bash
 Copy code
-cd ultimate-woo-addons
+cd all-woo-addons
 composer install
 Activate the plugin from WordPress Admin > Plugins.
 
@@ -66,11 +66,11 @@ Example:
 
 php
 Copy code
-namespace UltimateWooAddons\Frontend;
+namespace AllWooAddons\Frontend;
 
 class Shortcodes {
     public static function register() {
-        add_shortcode('uwa_demo', [self::class, 'render']);
+        add_shortcode('all_woo_addons_demo', [self::class, 'render']);
     }
 
     public static function render() {

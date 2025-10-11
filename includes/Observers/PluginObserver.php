@@ -1,8 +1,8 @@
 <?php
-namespace UltimateWooAddons\Observers;
+namespace AllWooAddons\Observers;
 
-use UltimateWooAddons\Contracts\ObserverInterface;
-use UltimateWooAddons\Core\EventManager;
+use AllWooAddons\Contracts\ObserverInterface;
+use AllWooAddons\Core\EventManager;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -85,14 +85,14 @@ class PluginObserver implements ObserverInterface
     private function handlePluginActivated($data): void
     {
         // Log activation
-        error_log('Ultimate Woo Addons: Plugin activated');
+        error_log('All Woo Addons: Plugin activated');
         
         // Set activation flag
-        update_option('ultimate_woo_addons_activated', true);
-        update_option('ultimate_woo_addons_activation_time', current_time('timestamp'));
+        update_option('all_woo_addons_activated', true);
+        update_option('all_woo_addons_activation_time', current_time('timestamp'));
         
         // Trigger WordPress action for other plugins to hook into
-        $this->eventManager->doAction('ultimate_woo_addons_activated', $data);
+        $this->eventManager->doAction('all_woo_addons_activated', $data);
     }
 
     /**
@@ -104,13 +104,13 @@ class PluginObserver implements ObserverInterface
     private function handlePluginDeactivated($data): void
     {
         // Log deactivation
-        error_log('Ultimate Woo Addons: Plugin deactivated');
+        error_log('All Woo Addons: Plugin deactivated');
         
         // Remove activation flag
-        delete_option('ultimate_woo_addons_activated');
+        delete_option('all_woo_addons_activated');
         
         // Trigger WordPress action for other plugins to hook into
-        $this->eventManager->doAction('ultimate_woo_addons_deactivated', $data);
+        $this->eventManager->doAction('all_woo_addons_deactivated', $data);
     }
 
     /**
@@ -122,12 +122,12 @@ class PluginObserver implements ObserverInterface
     private function handleBlockRegistered($data): void
     {
         if (is_array($data) && isset($data['block_name'])) {
-            error_log("Ultimate Woo Addons: Block '{$data['block_name']}' registered");
+            error_log("All Woo Addons: Block '{$data['block_name']}' registered");
             
             // Update registered blocks option
-            $registeredBlocks = get_option('ultimate_woo_addons_registered_blocks', []);
+            $registeredBlocks = get_option('all_woo_addons_registered_blocks', []);
             $registeredBlocks[] = $data['block_name'];
-            update_option('ultimate_woo_addons_registered_blocks', array_unique($registeredBlocks));
+            update_option('all_woo_addons_registered_blocks', array_unique($registeredBlocks));
         }
     }
 
@@ -140,10 +140,10 @@ class PluginObserver implements ObserverInterface
     private function handleAdminPageLoaded($data): void
     {
         if (is_array($data) && isset($data['page'])) {
-            error_log("Ultimate Woo Addons: Admin page '{$data['page']}' loaded");
+            error_log("All Woo Addons: Admin page '{$data['page']}' loaded");
             
             // Track admin page usage
-            $adminPages = get_option('ultimate_woo_addons_admin_pages_loaded', []);
+            $adminPages = get_option('all_woo_addons_admin_pages_loaded', []);
             $adminPages[] = [
                 'page' => $data['page'],
                 'timestamp' => current_time('timestamp'),
@@ -155,7 +155,7 @@ class PluginObserver implements ObserverInterface
                 $adminPages = array_slice($adminPages, -100);
             }
             
-            update_option('ultimate_woo_addons_admin_pages_loaded', $adminPages);
+            update_option('all_woo_addons_admin_pages_loaded', $adminPages);
         }
     }
 
@@ -168,6 +168,6 @@ class PluginObserver implements ObserverInterface
      */
     private function handleUnknownEvent(string $event, $data): void
     {
-        error_log("Ultimate Woo Addons: Unknown event '{$event}' received");
+        error_log("All Woo Addons: Unknown event '{$event}' received");
     }
 }

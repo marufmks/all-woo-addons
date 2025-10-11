@@ -1,7 +1,7 @@
 <?php
-namespace UltimateWooAddons\Abstracts;
+namespace AllWooAddons\Abstracts;
 
-use UltimateWooAddons\Contracts\BlockInterface;
+use AllWooAddons\Contracts\BlockInterface;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -106,8 +106,8 @@ abstract class AbstractBlock implements BlockInterface
      */
     protected function getBlockPath(): string
     {
-        $blockName = str_replace('ultimate-woo-addons/', '', $this->getBlockName());
-        return ULTIMATEWOOADDONS_PATH . '/build/blocks/' . $blockName;
+        $blockName = str_replace('all-woo-addons/', '', $this->getBlockName());
+        return ALLWOOADDONS_PATH . '/build/blocks/' . $blockName;
     }
 
     /**
@@ -151,8 +151,8 @@ abstract class AbstractBlock implements BlockInterface
      */
     protected function getBlockClasses(array $attributes): string
     {
-        $classes = ['ultimate-woo-addons-block'];
-        $classes[] = 'ultimate-woo-addons-' . str_replace('/', '-', $this->blockName);
+        $classes = ['all-woo-addons-block'];
+        $classes[] = 'all-woo-addons-' . str_replace('/', '-', $this->blockName);
         
         if (isset($attributes['className'])) {
             $classes[] = $attributes['className'];

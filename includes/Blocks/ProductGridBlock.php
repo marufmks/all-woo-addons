@@ -1,7 +1,7 @@
 <?php
-namespace UltimateWooAddons\Blocks;
+namespace AllWooAddons\Blocks;
 
-use UltimateWooAddons\Abstracts\AbstractBlock;
+use AllWooAddons\Abstracts\AbstractBlock;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -37,11 +37,11 @@ class ProductGridBlock extends AbstractBlock
      * @param array $blockConfig Block configuration
      * @param array $dependencies Block dependencies
      */
-    public function __construct(string $blockName = 'ultimate-woo-addons/product-grid', array $blockConfig = [], array $dependencies = [])
+    public function __construct(string $blockName = 'all-woo-addons/product-grid', array $blockConfig = [], array $dependencies = [])
     {
         $defaultConfig = [
-            'title' => __('Product Grid', 'ultimate-woo-addons'),
-            'description' => __('Display a grid of WooCommerce products.', 'ultimate-woo-addons'),
+            'title' => __('Product Grid', 'all-woo-addons'),
+            'description' => __('Display a grid of WooCommerce products.', 'all-woo-addons'),
             'category' => 'woocommerce',
             'icon' => 'grid-view',
             'keywords' => ['products', 'grid', 'woocommerce'],
@@ -99,14 +99,14 @@ class ProductGridBlock extends AbstractBlock
     public function render(array $attributes, string $content = ''): string
     {
         if (!function_exists('wc_get_products')) {
-            return '<p>' . __('WooCommerce is not active.', 'ultimate-woo-addons') . '</p>';
+            return '<p>' . __('WooCommerce is not active.', 'all-woo-addons') . '</p>';
         }
 
         $attributes = $this->sanitizeAttributes($attributes);
         $products = $this->getProducts($attributes);
 
         if (empty($products)) {
-            return '<p>' . __('No products found.', 'ultimate-woo-addons') . '</p>';
+            return '<p>' . __('No products found.', 'all-woo-addons') . '</p>';
         }
 
         return $this->renderProductGrid($products, $attributes);
@@ -149,20 +149,20 @@ class ProductGridBlock extends AbstractBlock
         ob_start();
         ?>
         <div class="<?php echo esc_attr($classes); ?>" data-columns="<?php echo esc_attr($columns); ?>">
-            <div class="ultimate-woo-addons-product-grid__container" style="grid-template-columns: repeat(<?php echo esc_attr($columns); ?>, 1fr);">
+            <div class="all-woo-addons-product-grid__container" style="grid-template-columns: repeat(<?php echo esc_attr($columns); ?>, 1fr);">
                 <?php foreach ($products as $product): ?>
-                    <div class="ultimate-woo-addons-product-card">
+                    <div class="all-woo-addons-product-card">
                         <?php if ($attributes['showImage']): ?>
-                            <div class="ultimate-woo-addons-product-card__image">
+                            <div class="all-woo-addons-product-card__image">
                                 <a href="<?php echo esc_url($product->get_permalink()); ?>">
                                     <?php echo $product->get_image('woocommerce_thumbnail'); ?>
                                 </a>
                             </div>
                         <?php endif; ?>
                         
-                        <div class="ultimate-woo-addons-product-card__content">
+                        <div class="all-woo-addons-product-card__content">
                             <?php if ($attributes['showTitle']): ?>
-                                <h3 class="ultimate-woo-addons-product-card__title">
+                                <h3 class="all-woo-addons-product-card__title">
                                     <a href="<?php echo esc_url($product->get_permalink()); ?>">
                                         <?php echo esc_html($product->get_name()); ?>
                                     </a>
@@ -170,7 +170,7 @@ class ProductGridBlock extends AbstractBlock
                             <?php endif; ?>
                             
                             <?php if ($attributes['showPrice']): ?>
-                                <div class="ultimate-woo-addons-product-card__price">
+                                <div class="all-woo-addons-product-card__price">
                                     <?php echo $product->get_price_html(); ?>
                                 </div>
                             <?php endif; ?>

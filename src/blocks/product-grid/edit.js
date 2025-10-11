@@ -18,9 +18,9 @@ export default function Edit() {
     }
 
     return (
-        <div {...blockProps} className="ultimate-woo-addons-product-grid">
+        <div {...blockProps} className="all-woo-addons-product-grid">
             {products.map((product) => (
-                <div key={product.id} className="ultimate-woo-addons-product-card">
+                <div key={product.id} className="all-woo-addons-product-card">
                     <h3>{product.title.rendered}</h3>
                 </div>
             ))}

@@ -1,7 +1,7 @@
 <?php
-namespace UltimateWooAddons\Blocks;
+namespace AllWooAddons\Blocks;
 
-use UltimateWooAddons\Contracts\BlockInterface;
+use AllWooAddons\Contracts\BlockInterface;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.

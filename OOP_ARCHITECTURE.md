@@ -1,6 +1,6 @@
-# Ultimate Woo Addons - OOP Architecture Guide
+# All Woo Addons - OOP Architecture Guide
 
-This document explains the Object-Oriented Programming (OOP) architecture implemented in the Ultimate Woo Addons plugin.
+This document explains the Object-Oriented Programming (OOP) architecture implemented in the All Woo Addons plugin.
 
 ## Overview
 
@@ -126,9 +126,9 @@ Core classes provide fundamental functionality:
 
 ```php
 <?php
-namespace UltimateWooAddons\Services;
+namespace AllWooAddons\Services;
 
-use UltimateWooAddons\Abstracts\AbstractService;
+use AllWooAddons\Abstracts\AbstractService;
 
 class MyService extends AbstractService
 {
@@ -153,9 +153,9 @@ class MyService extends AbstractService
 
 ```php
 <?php
-namespace UltimateWooAddons\Blocks;
+namespace AllWooAddons\Blocks;
 
-use UltimateWooAddons\Abstracts\AbstractBlock;
+use AllWooAddons\Abstracts\AbstractBlock;
 
 class MyBlock extends AbstractBlock
 {
@@ -177,9 +177,9 @@ class MyBlock extends AbstractBlock
 
 ```php
 <?php
-namespace UltimateWooAddons\Observers;
+namespace AllWooAddons\Observers;
 
-use UltimateWooAddons\Contracts\ObserverInterface;
+use AllWooAddons\Contracts\ObserverInterface;
 
 class MyObserver implements ObserverInterface
 {
@@ -209,7 +209,7 @@ class MyObserver implements ObserverInterface
 ```php
 // In Plugin::registerServices()
 $this->container->singleton('myService', function() {
-    return new \UltimateWooAddons\Services\MyService();
+    return new \AllWooAddons\Services\MyService();
 });
 $this->services[] = 'myService';
 ```
@@ -300,4 +300,4 @@ $this->assertTrue($observer->wasNotified());
 
 ## Conclusion
 
-This OOP architecture provides a solid foundation for the Ultimate Woo Addons plugin, making it more maintainable, testable, and extensible. The use of design patterns ensures consistent behavior and makes the codebase easier to understand and modify.
+This OOP architecture provides a solid foundation for the All Woo Addons plugin, making it more maintainable, testable, and extensible. The use of design patterns ensures consistent behavior and makes the codebase easier to understand and modify.

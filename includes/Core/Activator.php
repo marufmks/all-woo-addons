@@ -1,8 +1,8 @@
 <?php
-namespace UltimateWooAddons\Core;
+namespace AllWooAddons\Core;
 
-use UltimateWooAddons\Contracts\ActivatorInterface;
-use UltimateWooAddons\Core\EventManager;
+use AllWooAddons\Contracts\ActivatorInterface;
+use AllWooAddons\Core\EventManager;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -40,9 +40,9 @@ class Activator implements ActivatorInterface
     public function activate(): void
     {
         // Set activation flag
-        add_option('ultimate_woo_addons_activated', true);
-        add_option('ultimate_woo_addons_activation_time', current_time('timestamp'));
-        add_option('ultimate_woo_addons_version', ULTIMATEWOOADDONS_VERSION);
+        add_option('all_woo_addons_activated', true);
+        add_option('all_woo_addons_activation_time', current_time('timestamp'));
+        add_option('all_woo_addons_version', ALLWOOADDONS_VERSION);
 
         // Create database tables if needed
         $this->createDatabaseTables();
@@ -52,7 +52,7 @@ class Activator implements ActivatorInterface
 
         // Notify observers
         $this->eventManager->notify('plugin.activated', [
-            'version' => ULTIMATEWOOADDONS_VERSION,
+            'version' => ALLWOOADDONS_VERSION,
             'timestamp' => current_time('timestamp'),
         ]);
     }
@@ -65,7 +65,7 @@ class Activator implements ActivatorInterface
     public function deactivate(): void
     {
         // Remove activation flag
-        delete_option('ultimate_woo_addons_activated');
+        delete_option('all_woo_addons_activated');
 
         // Flush rewrite rules
         flush_rewrite_rules();
@@ -89,7 +89,7 @@ class Activator implements ActivatorInterface
 
         // Example table creation (uncomment if needed)
         /*
-        $table_name = $wpdb->prefix . 'ultimate_woo_addons_logs';
+        $table_name = $wpdb->prefix . 'all_woo_addons_logs';
         
         $sql = "CREATE TABLE $table_name (
             id mediumint(9) NOT NULL AUTO_INCREMENT,

@@ -1,7 +1,7 @@
 <?php
-namespace UltimateWooAddons\Core;
+namespace AllWooAddons\Core;
 
-use UltimateWooAddons\Contracts\ObserverInterface;
+use AllWooAddons\Contracts\ObserverInterface;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.

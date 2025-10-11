@@ -1,7 +1,7 @@
 <?php
-namespace UltimateWooAddons\Admin;
+namespace AllWooAddons\Admin;
 
-use UltimateWooAddons\Abstracts\AbstractService;
+use AllWooAddons\Abstracts\AbstractService;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -20,7 +20,7 @@ class Admin extends AbstractService
      * 
      * @var string
      */
-    private string $adminPageHook = 'toplevel_page_ultimate-woo-addons';
+    private string $adminPageHook = 'toplevel_page_all-woo-addons';
 
     /**
      * Service-specific registration logic
@@ -41,10 +41,10 @@ class Admin extends AbstractService
     public function registerAdminMenu(): void
     {
         add_menu_page(
-            __('Ultimate Woo Addons', 'ultimate-woo-addons'),
-            __('Ultimate Woo Addons', 'ultimate-woo-addons'),
+            __('All Woo Addons', 'all-woo-addons'),
+            __('All Woo Addons', 'all-woo-addons'),
             'manage_options',
-            'ultimate-woo-addons',
+            'all-woo-addons',
             [$this, 'renderAdminApp'],
             'dashicons-admin-generic'
         );
@@ -57,8 +57,8 @@ class Admin extends AbstractService
      */
     public function renderAdminApp(): void
     {
-        echo '<div id="ultimate-woo-addons-admin"></div>';
-        wp_enqueue_script('ultimate-woo-addons-admin');
+        echo '<div id="all-woo-addons-admin"></div>';
+        wp_enqueue_script('all-woo-addons-admin');
     }
 
     /**
@@ -91,8 +91,8 @@ class Admin extends AbstractService
         }
 
         wp_enqueue_script(
-            'ultimate-woo-addons-admin',
-            ULTIMATEWOOADDONS_URL . '/build/admin/index.js',
+            'all-woo-addons-admin',
+            ALLWOOADDONS_URL . '/build/admin/index.js',
             $assetFile['dependencies'],
             $assetFile['version'],
             true
@@ -107,7 +107,7 @@ class Admin extends AbstractService
      */
     private function getAssetFile(string $buildName): ?array
     {
-        $assetPath = ULTIMATEWOOADDONS_PATH . '/build/' . $buildName . '/index.asset.php';
+        $assetPath = ALLWOOADDONS_PATH . '/build/' . $buildName . '/index.asset.php';
         
         if (!file_exists($assetPath)) {
             return null;

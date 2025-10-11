@@ -1,7 +1,7 @@
 <?php
-namespace UltimateWooAddons\Services;
+namespace AllWooAddons\Services;
 
-use UltimateWooAddons\Abstracts\AbstractService;
+use AllWooAddons\Abstracts\AbstractService;
 
 if (!defined('ABSPATH')) {
     exit;

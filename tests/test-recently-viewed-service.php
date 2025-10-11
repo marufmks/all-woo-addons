@@ -14,16 +14,16 @@ class RecentlyViewedServiceTest extends WP_UnitTestCase {
      * Test service initialization
      */
     public function test_service_initialization() {
-        $service = new \UltimateWooAddons\Services\RecentlyViewedService();
+        $service = new \AllWooAddons\Services\RecentlyViewedService();
         
-        $this->assertInstanceOf(\UltimateWooAddons\Services\RecentlyViewedService::class, $service);
+        $this->assertInstanceOf(\AllWooAddons\Services\RecentlyViewedService::class, $service);
     }
 
     /**
      * Test cookie management
      */
     public function test_cookie_management() {
-        $service = new \UltimateWooAddons\Services\RecentlyViewedService();
+        $service = new \AllWooAddons\Services\RecentlyViewedService();
         
         // Test getting empty recently viewed products
         $products = $service->getRecentlyViewedProducts();
@@ -40,7 +40,7 @@ class RecentlyViewedServiceTest extends WP_UnitTestCase {
      * Test clearing recently viewed products
      */
     public function test_clear_recently_viewed() {
-        $service = new \UltimateWooAddons\Services\RecentlyViewedService();
+        $service = new \AllWooAddons\Services\RecentlyViewedService();
         
         // This should not throw any errors
         $service->clearRecentlyViewed();
