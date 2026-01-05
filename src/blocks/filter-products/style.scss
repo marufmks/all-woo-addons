@@ -1,0 +1,123 @@
+.all-woo-addons-filter-products {
+    &__grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(var(--awa-fp-columns, 4), 1fr);
+        
+        @media (max-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        @media (max-width: 480px) {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    &__card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    }
+    
+    &__image {
+        position: relative;
+        overflow: hidden;
+        
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    }
+    
+    &__content {
+        padding: 15px;
+    }
+    
+    &__title {
+        margin: 0 0 10px;
+        font-size: 16px;
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            
+            &:hover {
+                color: #0073aa;
+            }
+        }
+    }
+    
+    &__rating {
+        margin: 10px 0;
+    }
+    
+    &__price {
+        font-size: 18px;
+        font-weight: bold;
+        color: #0073aa;
+        margin: 10px 0;
+    }
+    
+    &__button-wrapper {
+        margin-top: 15px;
+    }
+    
+    &__button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #0073aa;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+        
+        &:hover {
+            background-color: #005a87;
+        }
+    }
+    
+    &__preview-header {
+        margin-bottom: 20px;
+        padding: 15px;
+        background: #f5f5f5;
+        border-radius: 4px;
+        
+        h3 {
+            margin: 0 0 10px;
+        }
+    }
+    
+    &__preview-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    &__filter-tag {
+        display: inline-block;
+        padding: 5px 10px;
+        background: #fff;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+    
+    &__image-placeholder {
+        display: block;
+        width: 100%;
+        height: 200px;
+        background: #f0f0f0;
+    }
+    
+    &.is-preview {
+        .is-placeholder {
+            opacity: 0.6;
+        }
+    }
+}

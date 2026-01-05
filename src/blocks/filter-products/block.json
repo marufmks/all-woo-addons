@@ -1,0 +1,66 @@
+{
+  "apiVersion": 2,
+  "name": "all-woo-addons/filter-products",
+  "title": "Filter Products",
+  "category": "woocommerce",
+  "icon": "filter",
+  "description": "Display WooCommerce products with filtering options by category, price, and sorting.",
+  "keywords": ["products", "filter", "category", "price", "woocommerce", "sort"],
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  },
+  "attributes": {
+    "limit": {
+      "type": "number",
+      "default": 12
+    },
+    "columns": {
+      "type": "number",
+      "default": 4
+    },
+    "category": {
+      "type": "string",
+      "default": ""
+    },
+    "minPrice": {
+      "type": "number",
+      "default": 0
+    },
+    "maxPrice": {
+      "type": "number",
+      "default": 0
+    },
+    "sortBy": {
+      "type": "string",
+      "default": "date"
+    },
+    "showPrice": {
+      "type": "boolean",
+      "default": true
+    },
+    "showImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showRating": {
+      "type": "boolean",
+      "default": false
+    },
+    "showButton": {
+      "type": "boolean",
+      "default": true
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "View Product"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "editorStyle": "file:./index.css"
+}

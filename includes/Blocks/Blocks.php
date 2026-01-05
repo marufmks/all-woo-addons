@@ -1,12 +1,11 @@
-<?php 
+<?php
 namespace AllWooAddons\Blocks;
 
 use AllWooAddons\Abstracts\AbstractService;
 use AllWooAddons\Blocks\BlockFactory;
 use AllWooAddons\Blocks\ProductGridBlock;
-use AllWooAddons\Blocks\HelloWorldBlock;
 use AllWooAddons\Blocks\RecentlyViewedProductsBlock;
-
+use AllWooAddons\Blocks\FilterProductsBlock;
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
@@ -54,12 +53,12 @@ class Blocks extends AbstractService
     {
         // Register Product Grid Block
         BlockFactory::registerBlockType('all-woo-addons/product-grid', ProductGridBlock::class);
-        
-        // Register Hello World Block
-        BlockFactory::registerBlockType('all-woo-addons/hello-world', HelloWorldBlock::class);
 
         // Register Recently Viewed Products Block
         BlockFactory::registerBlockType('all-woo-addons/recently-viewed-products', RecentlyViewedProductsBlock::class);
+
+        // Register Filter Products Block
+        BlockFactory::registerBlockType('all-woo-addons/filter-products', FilterProductsBlock::class);
     }
 
     /**
@@ -70,8 +69,8 @@ class Blocks extends AbstractService
     public function registerBlocks(): void
     {
         $this->registerProductGridBlock();
-        $this->registerHelloWorldBlock();
         $this->registerRecentlyViewedProductsBlock();
+        $this->registerFilterProductsBlock();
     }
 
     /**
@@ -82,34 +81,15 @@ class Blocks extends AbstractService
     private function registerProductGridBlock(): void
     {
         $blockPath = ALLWOOADDONS_PATH . '/build/blocks/product-grid';
-        
+
         if (!file_exists($blockPath . '/block.json')) {
             return;
         }
 
         $block = BlockFactory::create('all-woo-addons/product-grid');
         $block->register();
-        
+
         $this->registeredBlocks[] = 'all-woo-addons/product-grid';
-    }
-
-    /**
-     * Register Hello World Block
-     * 
-     * @return void
-     */
-    private function registerHelloWorldBlock(): void
-    {
-        $blockPath = ALLWOOADDONS_PATH . '/build/blocks/hello-world';
-        
-        if (!file_exists($blockPath . '/block.json')) {
-            return;
-        }
-
-        $block = BlockFactory::create('all-woo-addons/hello-world');
-        $block->register();
-        
-        $this->registeredBlocks[] = 'all-woo-addons/hello-world';
     }
 
     private function registerRecentlyViewedProductsBlock(): void
@@ -124,6 +104,20 @@ class Blocks extends AbstractService
         $block->register();
 
         $this->registeredBlocks[] = 'all-woo-addons/recently-viewed-products';
+    }
+
+    private function registerFilterProductsBlock(): void
+    {
+        $blockPath = ALLWOOADDONS_PATH . '/build/blocks/filter-products';
+
+        if (!file_exists($blockPath . '/block.json')) {
+            return;
+        }
+
+        $block = BlockFactory::create('all-woo-addons/filter-products');
+        $block->register();
+
+        $this->registeredBlocks[] = 'all-woo-addons/filter-products';
     }
 
     /**

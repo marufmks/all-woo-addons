@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "name": "all-woo-addons/hello-world",
-  "title": "Hello World",
-  "category": "widgets",
-  "icon": "smiley",
-  "editorScript": "file:./index.js"
-}
